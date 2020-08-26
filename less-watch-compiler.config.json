@@ -1,0 +1,9 @@
+{
+	"allowedExtensions":[".less"],
+	"minified":true,
+	"sourceMap":false,
+	"watchFolder":"public/css/src",
+	"outputFolder":"public/css/dist",
+	"mainFile":"style.less",
+	"plugins":"less-plugin-autoprefix"
+}
