@@ -10,7 +10,7 @@ class Core {
 	public function __construct() {
 		$url = $this->get_url_params();
 
-		// CONTROLLER
+		// Controller
 		$controller_name = $this->parse_url_value($url[0]);
 
 		if (file_exists("../app/controllers/{$controller_name}.php")) {
@@ -23,7 +23,7 @@ class Core {
 		$controller_class = "\app\controllers\\{$this->controller}";
 		$this->controller = new $controller_class;
 
-		// METHOD
+		// Method
 		if (isset($url[1])) {
 			$method_name = $this->parse_url_value($url[1]);
 			if (method_exists($this->controller, $method_name)) {
@@ -32,12 +32,12 @@ class Core {
 			}
 		}
 
-		// PARAMS
+		// Params
 		if ($url) {
 			$this->params = array_values($url);
 		}
 
-		// CALL CONTROLLER'S METHOD SENDING PARAMS ARRAY
+		// Call
 		call_user_func_array(
 			[
 				$this->controller,
@@ -63,4 +63,5 @@ class Core {
 		$value = str_replace(' ', '', $value);
 		return $value;
 	}
+
 }

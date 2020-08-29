@@ -3,6 +3,7 @@
 namespace app\libs;
 
 class Session {
+	
 	public function __construct() {
 		session_start();
 	}

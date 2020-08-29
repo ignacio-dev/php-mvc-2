@@ -3,6 +3,7 @@
 namespace app\libs;
 
 class Database {
+
 	private $host;
 	private $user;
 	private $pass;
@@ -11,7 +12,6 @@ class Database {
 
 	private $dbh;
 	private $stmt;
-	private $error;
 
 	public function __construct() {
 		$this->dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->name}";
@@ -29,8 +29,7 @@ class Database {
 			);
 		}
 		catch(PDOException $e) {
-			$this->error = $e->getMessage();
-			throw new Exception($this->error, 1);
+			throw new Exception($e->getMessage(), 1);
 		}
 	}
 
@@ -79,4 +78,5 @@ class Database {
 	public function get_row_count() {
 		return $this->stmt->rowCount();
 	}
+
 }

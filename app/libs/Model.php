@@ -3,6 +3,7 @@
 namespace app\libs;
 
 class Model {
+	
 	protected $db;
 
 	public function __construct() {

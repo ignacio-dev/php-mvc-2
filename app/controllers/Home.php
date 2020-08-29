@@ -4,12 +4,14 @@ namespace app\controllers;
 
 class Home extends \app\libs\Controller {
 
-public function __construct() {
-	parent::__construct();
-}
+	public function __construct() {
+		parent::__construct();
+	}
 
-public function index() {
-	echo 'Hello world';
-}
+	public function index() {
+		$this->view('home/index', [
+			'message' => 'Welcome to my website!'
+		]);
+	}
 
 }

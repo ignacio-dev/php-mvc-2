@@ -3,19 +3,21 @@
 namespace app\libs;
 
 class Controller {
-	protected $session;
-	protected $user;
+	
+	private $models_path = '../app/models';
+	private $helpers_path = '../app/helpers';
+	private $views_path = '../app/views';
 
-	public function __construct() {
+	public function __construct() {	
 		$this->session = new \app\libs\Session();
 		$this->user = new \app\libs\User();
+		$this->template_engine = new \app\libs\Template_Engine($this->views_path);
 	}
 
 	protected function model($model) {
-		$path = "../app/models/{$model}.php";
-
-		if (file_exists($path)) {
-			require_once $path;
+		$file_path = "{$this->models_path}/{$model}";
+		if (file_exists($file_path)) {
+			require_once $file_path;
 			return new $model;
 		}
 		else {
@@ -23,22 +25,11 @@ class Controller {
 		}
 	}
 
-	protected function view($view, $data=[]) {
-		$path = "../app/views/{$view}.php";
-
-		if (file_exists($path)) {
-			require_once $path;
-		}
-		else {
-			$this->fatal_error('View not found.');
-		}
-	}
-
 	protected function helper($helper, $data=[]) {
-		$path = "../app/helpers/{$helper}.php";
+		$file_path = "{$this->helpers_path}/{$helper}.php";
 		
-		if (file_exists($path)) {
-			require_once $path;
+		if (file_exists($file_path)) {
+			require_once $file_path;
 			return new $helper($data);
 		}
 		else {
@@ -46,7 +37,21 @@ class Controller {
 		}
 	}
 
+	protected function view($view, $data=[]) {
+		$view .= '.html';
+		$file_path = "{$this->views_path}/{$view}";
+
+		if (file_exists($file_path)) {
+			$this->template_engine->render($view, $data);
+			exit();
+		}
+		else {
+			$this->fatal_error('View not found.');
+		}
+	}
+
 	protected function fatal_error($msg) {
 		die($msg);
 	}
+
 }
