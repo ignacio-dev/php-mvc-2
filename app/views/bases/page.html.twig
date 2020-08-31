@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% include 'layout/head.html.twig' %}
+		{% block head %}{% endblock head %}
+	</head>
+	<body>
+		<header>
+			{% include 'layout/header.html.twig' %}
+		</header>
+		<main>
+			{% block content %}{% endblock content %}
+		</main>
+		<footer>
+			{% include 'layout/footer.html.twig' %}
+		</footer>
+		{% block inline_scripts %}{% endblock inline_scripts %}
+		{% include 'layout/scripts.html.twig' %}
+	</body>
+</html>

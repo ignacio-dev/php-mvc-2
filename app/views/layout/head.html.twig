@@ -1,0 +1,40 @@
+{% set site_name = constant('SITE_NAME') %}
+{% set site_url = constant('SITE_URL') %}
+{% set site_description = constant('SITE_DESCRIPTION') %}
+
+{# META TAGS #}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{# TITLE #}
+<title>
+	{% if subtitle %}
+		{{ subtitle }} - {{ site_name }}
+	{% else %}
+		{{ site_name }}
+	{% endif %}
+</title>
+
+{# FAVICON #}
+
+{# SEO #}
+<meta property="og:title" content="{{ site_name }}"/>
+<meta property="og:url" content="{{ site_url }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:description" content="{{ site_description }}"/>
+<meta property="og:image" content="{{ site_url }}/og.jpg"/>
+
+<meta name="twitter:card" content="summary"/>
+{% if constant('SITE_TWITTER') is defined %}
+	<meta name="twitter:site" content="{{ constant('SITE_TWITTER') }}"/>
+{% endif %}
+<meta name="twitter:title" content="{{ site_name }}"/>
+<meta name="twitter:description" content="{{ site_description }}"/>
+<meta name="twitter:image" content="{{ site_url }}/twitter.jpg"/>
+
+<link rel="canonical" href="{{ site_url }}"/>
+<meta name="description" content="{{ site_description }}">
+
+{# STYLE SHEETS #}
+<link rel="stylesheet" href="{{ 'css/dist/style.min.css' | file_timestamp }}">	

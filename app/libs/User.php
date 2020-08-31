@@ -3,8 +3,6 @@
 namespace app\libs;
 
 class User {
-	
-	public $logged_in;
 
 	public function __construct() {
 		// ...

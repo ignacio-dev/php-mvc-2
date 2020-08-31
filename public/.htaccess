@@ -1,11 +1,13 @@
 <IfModule mod_rewrite.c>
+
 	Options -Multiviews
 	RewriteEngine On
 
 	RewriteBase /public
-
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
+
+	# RE-WRITE URI FROM /a/b/c TO ?url=a/b/c
 	RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
-	
+
 </IfModule>

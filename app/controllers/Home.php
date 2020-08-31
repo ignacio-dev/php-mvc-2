@@ -10,7 +10,8 @@ class Home extends \app\libs\Controller {
 
 	public function index() {
 		$this->view('home/index', [
-			'message' => 'Welcome to my website!'
+			'message' => 'Welcome!',
+			'subtitle' => 'Homepage'
 		]);
 	}
 

@@ -4,20 +4,26 @@ namespace app\libs;
 
 class Controller {
 	
-	private $models_path = '../app/models';
-	private $helpers_path = '../app/helpers';
-	private $views_path = '../app/views';
+	const MODELS_PATH = '../app/models';
+	const HELPERS_PATH = '../app/helpers';
+	const VIEWS_PATH = '../app/views';
+
+	protected $session;
+	protected $user;
+	private $template_engine;
 
 	public function __construct() {	
 		$this->session = new \app\libs\Session();
 		$this->user = new \app\libs\User();
-		$this->template_engine = new \app\libs\Template_Engine($this->views_path);
+		$this->template_engine = new \app\libs\Template_Engine(self::VIEWS_PATH);
 	}
 
 	protected function model($model) {
-		$file_path = "{$this->models_path}/{$model}";
+		$file_path = self::MODELS_PATH."/{$model}.php";
+		
 		if (file_exists($file_path)) {
 			require_once $file_path;
+			$model = "\\app\\models\\{$model}";
 			return new $model;
 		}
 		else {
@@ -26,10 +32,11 @@ class Controller {
 	}
 
 	protected function helper($helper, $data=[]) {
-		$file_path = "{$this->helpers_path}/{$helper}.php";
+		$file_path = self::HELPERS_PATH."/{$helper}.php";
 		
 		if (file_exists($file_path)) {
 			require_once $file_path;
+			$helper = "\\app\\helpers\\{$helper}";
 			return new $helper($data);
 		}
 		else {
@@ -38,8 +45,8 @@ class Controller {
 	}
 
 	protected function view($view, $data=[]) {
-		$view .= '.html';
-		$file_path = "{$this->views_path}/{$view}";
+		$view .= Template_Engine::TEMPLATE_EXTENSION;
+		$file_path = self::VIEWS_PATH."/{$view}";
 
 		if (file_exists($file_path)) {
 			$this->template_engine->render($view, $data);

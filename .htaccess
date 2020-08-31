@@ -1,5 +1,14 @@
+Options -Indexes
 <IfModule mod_rewrite.c>
+
 	RewriteEngine On
+
+	# FORCE HTTPS
+	RewriteCond %{HTTPS} off
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+	# FORCE REDIRECT TO PUBLIC ROOT
 	RewriteRule ^$ public/ [L]
 	RewriteRule (.*) public/$1 [L]
+
 </IfModule>

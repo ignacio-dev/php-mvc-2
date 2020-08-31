@@ -1,29 +1,6 @@
-\libs\core
-\libs\database
+Docker
 
-\libs\app\controller
-\libs\app\model
-\libs\app\view
+Form Libraries
 
-\libs\products\lesson
-\libs\product\lesson\upload
-\libs\product\lesson\live
-
-\libs\users\user
-\libs\users\member
-\libs\users\instructor
-\libs\users\admin
-
-\libs\mvc\controller
-\libs\mvc\model
-\libs\mvc\view
-
-\libs\core
-\libs\database
-
-\libs\
-
-
-MAMP and MAMP PRO 5 use MySQL 5.7 as their database server. Therefore, existing data has been copied to folders named …/db/mysql57. Your original data still exists untouched – either in the original directory or in one that has a time stamp attached in its name.
-
-You should convert the data right after the first start of MySQL using the command 'Upgrade MySQL databases' (⌘⌥U) from the Tools menu.
+https://via-profit.github.io/js-form-validator/
+https://getuikit.com/ !!!!!!!!

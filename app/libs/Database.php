@@ -10,9 +10,6 @@ class Database {
 	private $name;
 	private $port;
 
-	private $dbh;
-	private $stmt;
-
 	public function __construct() {
 		$this->dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->name}";
 		$this->options = array(

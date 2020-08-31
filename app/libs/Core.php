@@ -3,9 +3,9 @@
 namespace app\libs;
 
 class Core {
-	protected $controller = 'Home';
-	protected $method = 'index';
-	protected $params = [];
+	private $controller = 'Home';
+	private $method = 'index';
+	private $params = [];
 
 	public function __construct() {
 		$url = $this->get_url_params();
@@ -13,10 +13,13 @@ class Core {
 		// Controller
 		$controller_name = $this->parse_url_value($url[0]);
 
-		if (file_exists("../app/controllers/{$controller_name}.php")) {
-			$this->controller = $controller_name;
-			unset($url[0]);
+		if (!file_exists("../app/controllers/{$controller_name}.php")) {
+			header('Location: '.SITE_URL);
+			exit();
 		}
+
+		$this->controller = $controller_name;
+		unset($url[0]);
 
 		require_once "../app/controllers/{$this->controller}.php";
 
@@ -55,12 +58,20 @@ class Core {
 			$url = explode('/', $url);
 			return $url;
 		}
+		else {
+			return [
+				$this->controller,
+				$this->method,
+				$this->params
+			];
+		}
 	}
 
 	private function parse_url_value($value) {
+		$value = str_replace(' ', '', $value);
 		$value = str_replace('-', ' ', $value);
 		$value = ucwords($value);
-		$value = str_replace(' ', '', $value);
+		$value = str_replace(' ', '_', $value);
 		return $value;
 	}
 
